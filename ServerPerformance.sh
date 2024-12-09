@@ -11,4 +11,8 @@ MEMORY() {
     echo "Used memory: ${USED_MEM}MB Free memory: ${FREE_MEM}MB"
 }
 
+DISK() {
+    df -h
+}
+
 MEMORY
