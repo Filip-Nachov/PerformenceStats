@@ -1,10 +1,5 @@
 #!/bin/bash
 
-Bar() {
-    echo '     CPU USAGE                   MEM USAGE                        DISK MEMORY                            TOP 5 procceses
-          _____________________      _______________________    _________________________________________     _________________________'
-}
-
 CPU() {
     top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1"%"}'
 }
@@ -21,6 +16,16 @@ DISK() {
 
 Top5CPU() {
     ps -eo user,pid,%cpu,%mem,etime,comm --sort=-%cpu | head -n 6
+}
+
+Bar() {
+    CMD1=$(CPU)
+    CMD2=$(MEMORY)
+    CMD3=$(DISK)
+    CMD4=$(Top5CPU)
+    echo '     CPU USAGE                   MEM USAGE                        DISK MEMORY                            TOP 5 procceses     '
+    echo '_____________________      _______________________    _________________________________________     _________________________'
+    echo "      ${CMD1}                       ${CMD2}                           ${CMD3}                                 ${CMD4}        "
 }
 
 CPU
