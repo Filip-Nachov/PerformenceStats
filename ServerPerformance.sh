@@ -20,6 +20,17 @@ Top5CPU() {
     ps -eo user,pid,%cpu,%mem,etime,comm --sort=-%cpu | head -n 6
 }
 
+CalculateMaxWidth() {
+    local maxWidth=0
+    for str in "$@"; do
+        local length=${#str}
+        if ((length > max_width)); then
+            max_width=$length
+        fi
+    done
+    echo $max_width
+}
+
 Bar() {
     CMD1=$(CPU)
     CMD2=$(MEMORY)
