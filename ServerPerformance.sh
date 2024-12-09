@@ -12,7 +12,8 @@ MEMORY() {
 }
 
 DISK() {
-    df -h --output=source,pcent,target | tail -n +2 | head -n 5 | awk '{print $1, $2, $3}' | sed 's|/mnt/wsl.*|/mnt/wsl...|;s|/mnt/c|C:|;s|/mnt/d|D:|'
+    df -h --output=source,pcent | tail -n +2 | \
+        sed 's|/mnt/wsl.*|/mnt/wsl...|;s|/mnt/c|C:|;s|/mnt/d|D:|'
 }
 
 Top5CPU() {
@@ -30,34 +31,8 @@ Bar() {
     DISK_WIDTH=40
     PROC_WIDTH=50
 
-    printf "%-${CPU_WIDTH}s %-${MEM_WIDTH}s %-${DISK_WIDTH}s %-${PROC_WIDTH}s\n" "CPU USAGE" "MEMORY USAGE" "DISK USAGE" "TOP 5 PROCESSES"
-    printf "%-${CPU_WIDTH}s %-${MEM_WIDTH}s %-${DISK_WIDTH}s %-${PROC_WIDTH}s\n" "-----------" "-------------" "------------------------------" "--------------------------------------------------"
-
-    printf "%-${CPU_WIDTH}s" "$(echo "$CMD1" | cut -c1-${CPU_WIDTH})"
-    printf "%-${MEM_WIDTH}s" " "
-    printf "%-${DISK_WIDTH}s" " "
-    printf "%-${PROC_WIDTH}s\n" " "
-
-    while IFS= read -r line; do
-        printf "%-${CPU_WIDTH}s" " "
-        printf "%-${MEM_WIDTH}s" "$(echo "$line" | cut -c1-${MEM_WIDTH})"
-        printf "%-${DISK_WIDTH}s" " "
-        printf "%-${PROC_WIDTH}s\n" " "
-    done <<< "$CMD2"
-
-    while IFS= read -r line; do
-        printf "%-${CPU_WIDTH}s" " "
-        printf "%-${MEM_WIDTH}s" " "
-        printf "%-${DISK_WIDTH}s" "$(echo "$line" | cut -c1-${DISK_WIDTH})"
-        printf "%-${PROC_WIDTH}s\n" " "
-    done <<< "$CMD3"
-
-    while IFS= read -r line; do
-        printf "%-${CPU_WIDTH}s" " "
-        printf "%-${MEM_WIDTH}s" " "
-        printf "%-${DISK_WIDTH}s" " "
-        printf "%-${PROC_WIDTH}s\n" "$(echo "$line" | cut -c1-${PROC_WIDTH})"
-    done <<< "$CMD4"
+    printf "%-20s %-20s %-20s %-20s\n" "CPU" "Memory" "Disk" "Process"
+    printf "%-20s %-20s %-20s %-20s\n" "----" "-------" "----" "-------"
 }
 
 Bar
