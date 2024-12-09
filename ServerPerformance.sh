@@ -6,8 +6,8 @@ CPU() {
 }
 
 MEMORY() {
-    USED_MEM = $(free -m | grep "Mem" | awk '{print $3}')
-    FREE_MEM = $(free -m | grep "Mem" | awk '{print $4}')
+    USED_MEM=$(free -m | grep "Mem" | awk '{print $3}')
+    FREE_MEM=$(free -m | grep "Mem" | awk '{print $4}')
     echo "Used memory: ${USED_MEM}MB Free memory: ${FREE_MEM}MB"
 }
 
