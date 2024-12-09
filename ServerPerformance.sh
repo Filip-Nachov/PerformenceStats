@@ -15,4 +15,6 @@ DISK() {
     df -h
 }
 
+CPU
 MEMORY
+DISK
