@@ -15,6 +15,10 @@ DISK() {
     df -h
 }
 
+Top5CPU() {
+    ps -eo user,pid,%cpu,%mem,etime,comm --sort=-%cpu | head -n 6
+}
+
 CPU
 MEMORY
 DISK
