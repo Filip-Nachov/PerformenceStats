@@ -37,13 +37,10 @@ Bar() {
     CMD3=$(DISK)
     CMD4=$(Top5CPU)
 
-    CPU_WIDTH=18
-    MEM_WIDTH=30
-    DISK_WIDTH=40
-    PROC_WIDTH=50
-
-    printf "%-20s %-20s %-20s %-20s\n" "CPU" "Memory" "Disk" "Process"
-    printf "%-20s %-20s %-20s %-20s\n" "----" "-------" "----" "-------"
+    CPU_WIDTH=$(CalculateMaxWidth "CPU USAGE" "$CMD1")
+    MEM_WIDTH=$(CalculateMaxWidth "MEMORY USAGE" "$CMD2")
+    DISK_WIDTH=$(CalculateMaxWidth "DISK USAGE" "$CMD3")
+    PROC_WIDTH=$(CalculateMaxWidth "TOP 5 PROCESSES" "$CMD4")
 }
 
 Bar
