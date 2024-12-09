@@ -22,3 +22,4 @@ Top5CPU() {
 CPU
 MEMORY
 DISK
+Top5CPU
