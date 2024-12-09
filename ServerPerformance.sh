@@ -28,7 +28,4 @@ Bar() {
     echo "      ${CMD1}                       ${CMD2}                           ${CMD3}                                 ${CMD4}        "
 }
 
-CPU
-MEMORY
-DISK
-Top5CPU
+Bar
