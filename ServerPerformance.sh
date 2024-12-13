@@ -36,29 +36,29 @@ Bar() {
     CMD3=$(DISK)
     CMD4=$(Top5CPU)
 
-    PrintDelay "CPU USAGE" 0.05
-    PrintDelay "-----------" 0.05
-    PrintDelay "$CMD1" 0.05
-    PrintDelay "" 0.05
+    PrintDelay "CPU USAGE" 0.02
+    PrintDelay "-----------" 0.01
+    PrintDelay "$CMD1" 0.03
+    PrintDelay "" 0.01
 
-    PrintDelay "MEMORY USAGE" 0.05
-    PrintDelay "------------" 0.05
+    PrintDelay "MEMORY USAGE" 0.02
+    PrintDelay "------------" 0.01
     while IFS= read -r line; do
-        PrintDelay "$line" 0.05
+        PrintDelay "$line" 0.03
     done <<< "$CMD2"
-    PrintDelay "" 0.05
+    PrintDelay "" 0.01
 
-    PrintDelay "DISK USAGE" 0.05
-    PrintDelay "----------" 0.05
+    PrintDelay "DISK USAGE" 0.02
+    PrintDelay "----------" 0.01
     while IFS= read -r line; do
-        PrintDelay "$line" 0.05
+        PrintDelay "$line" 0.03
     done <<< "$CMD3"
     PrintDelay "" 0.05
 
-    PrintDelay "TOP 5 PROCESSES" 0.05
-    PrintDelay "---------------" 0.05
+    PrintDelay "TOP 5 PROCESSES" 0.02
+    PrintDelay "---------------" 0.01
     while IFS= read -r line; do
-        PrintDelay "$line" 0.05
+        PrintDelay "$line" 0.03
     done <<< "$CMD4"
 }
 
