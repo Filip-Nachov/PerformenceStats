@@ -1,5 +1,16 @@
 #!/bin/bash
 
+PrintDelay() {
+    local text="$1"
+    local delay="$2"
+    for (( i=0; i<${#text}; i++ )); do
+        echo -n "${text:$i:1}"
+        sleep "$delay"
+    done
+    echo
+}
+
+
 CPU() {
     top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1"%"}'
 }
@@ -20,31 +31,36 @@ Top5CPU() {
 }
 
 Bar() {
-
     CMD1=$(CPU)
     CMD2=$(MEMORY)
     CMD3=$(DISK)
     CMD4=$(Top5CPU)
 
-    CPU_WIDTH=18
-    MEM_WIDTH=30
-    DISK_WIDTH=40
-    PROC_WIDTH=50
+    PrintDelay "CPU USAGE" 0.05
+    PrintDelay "-----------" 0.05
+    PrintDelay "$CMD1" 0.05
+    PrintDelay "" 0.05
 
-    printf "%-${CPU_WIDTH}s" "CPU Usage:"
-    printf "%-${MEM_WIDTH}s" "Memory Usage:"
-    printf "%-${DISK_WIDTH}s" "Disk Usage:"
-    printf "%-${PROC_WIDTH}s\n" "Top 5 CPU Processes:"
+    PrintDelay "MEMORY USAGE" 0.05
+    PrintDelay "------------" 0.05
+    while IFS= read -r line; do
+        PrintDelay "$line" 0.05
+    done <<< "$CMD2"
+    PrintDelay "" 0.05
 
-    printf "%-${CPU_WIDTH}s" "$(CPU)"
-    printf "%-${MEM_WIDTH}s" "$(MEMORY)"
-    printf "%-${DISK_WIDTH}s" "$(DISK)"
-    printf "%-${PROC_WIDTH}s\n" " "
+    PrintDelay "DISK USAGE" 0.05
+    PrintDelay "----------" 0.05
+    while IFS= read -r line; do
+        PrintDelay "$line" 0.05
+    done <<< "$CMD3"
+    PrintDelay "" 0.05
 
-    printf "%-${CPU_WIDTH}s" ""
-    printf "%-${MEM_WIDTH}s" ""
-    printf "%-${DISK_WIDTH}s" ""
-    printf "%-${PROC_WIDTH}s\n" "$(Top5CPU)" 
+    PrintDelay "TOP 5 PROCESSES" 0.05
+    PrintDelay "---------------" 0.05
+    while IFS= read -r line; do
+        PrintDelay "$line" 0.05
+    done <<< "$CMD4"
 }
+
 
 Bar
