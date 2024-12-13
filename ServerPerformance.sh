@@ -23,7 +23,10 @@ MEMORY() {
 }
 
 DISK() {
-    df -h --output=source,pcent | tail -n +2
+    df -h --exclude-type=tmpfs --exclude-type=devtmpfs --output=source,used,avail,pcent,target
+    
+    echo
+    
 }
 
 Top5CPU() {
