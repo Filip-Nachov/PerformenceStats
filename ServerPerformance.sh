@@ -12,8 +12,7 @@ MEMORY() {
 }
 
 DISK() {
-    df -h --output=source,pcent | tail -n +2 | \
-        sed 's|/mnt/wsl.*|/mnt/wsl...|;s|/mnt/c|C:|;s|/mnt/d|D:|'
+    df -h --output=source,pcent | tail -n +2
 }
 
 Top5CPU() {
@@ -21,6 +20,7 @@ Top5CPU() {
 }
 
 Bar() {
+
     CMD1=$(CPU)
     CMD2=$(MEMORY)
     CMD3=$(DISK)
@@ -31,34 +31,20 @@ Bar() {
     DISK_WIDTH=40
     PROC_WIDTH=50
 
-    printf "%-${CPU_WIDTH}s %-${MEM_WIDTH}s %-${DISK_WIDTH}s %-${PROC_WIDTH}s\n" "CPU USAGE" "MEMORY USAGE" "DISK USAGE" "TOP 5 PROCESSES"
-    printf "%-${CPU_WIDTH}s %-${MEM_WIDTH}s %-${DISK_WIDTH}s %-${PROC_WIDTH}s\n" "-----------" "---------------------" "------------------------------" "--------------------------------------------------"
+    printf "%-${CPU_WIDTH}s" "CPU Usage:"
+    printf "%-${MEM_WIDTH}s" "Memory Usage:"
+    printf "%-${DISK_WIDTH}s" "Disk Usage:"
+    printf "%-${PROC_WIDTH}s\n" "Top 5 CPU Processes:"
 
-    printf "%-${CPU_WIDTH}s" "$(echo "$CMD1" | cut -c1-${CPU_WIDTH})"
-    printf "%-${MEM_WIDTH}s" " "
-    printf "%-${DISK_WIDTH}s" " "
+    printf "%-${CPU_WIDTH}s" "$(CPU)"
+    printf "%-${MEM_WIDTH}s" "$(MEMORY)"
+    printf "%-${DISK_WIDTH}s" "$(DISK)"
     printf "%-${PROC_WIDTH}s\n" " "
 
-    while IFS= read -r line; do
-        printf "%-${CPU_WIDTH}s" " "
-        printf "%-${MEM_WIDTH}s" "$(echo "$line" | cut -c1-${MEM_WIDTH})"
-        printf "%-${DISK_WIDTH}s" " "
-        printf "%-${PROC_WIDTH}s\n" " "
-    done <<< "$CMD2"
-
-    while IFS= read -r line; do
-        printf "%-${CPU_WIDTH}s" " "
-        printf "%-${MEM_WIDTH}s" " "
-        printf "%-${DISK_WIDTH}s" "$(echo "$line" | cut -c1-${DISK_WIDTH})"
-        printf "%-${PROC_WIDTH}s\n" " "
-    done <<< "$CMD3"
-
-    while IFS= read -r line; do
-        printf "%-${CPU_WIDTH}s" " "
-        printf "%-${MEM_WIDTH}s" " "
-        printf "%-${DISK_WIDTH}s" " "
-        printf "%-${PROC_WIDTH}s\n" "$(echo "$line" | cut -c1-${PROC_WIDTH})"
-    done <<< "$CMD4"
+    printf "%-${CPU_WIDTH}s" ""
+    printf "%-${MEM_WIDTH}s" ""
+    printf "%-${DISK_WIDTH}s" ""
+    printf "%-${PROC_WIDTH}s\n" "$(Top5CPU)" 
 }
 
 Bar
