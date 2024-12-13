@@ -26,13 +26,13 @@ Bar() {
     CMD3=$(DISK)
     CMD4=$(Top5CPU)
 
-     CPU_WIDTH=18
+    CPU_WIDTH=18
     MEM_WIDTH=30
     DISK_WIDTH=40
     PROC_WIDTH=50
 
     printf "%-${CPU_WIDTH}s %-${MEM_WIDTH}s %-${DISK_WIDTH}s %-${PROC_WIDTH}s\n" "CPU USAGE" "MEMORY USAGE" "DISK USAGE" "TOP 5 PROCESSES"
-    printf "%-${CPU_WIDTH}s %-${MEM_WIDTH}s %-${DISK_WIDTH}s %-${PROC_WIDTH}s\n" "-----------" "-------------" "------------------------------" "--------------------------------------------------"
+    printf "%-${CPU_WIDTH}s %-${MEM_WIDTH}s %-${DISK_WIDTH}s %-${PROC_WIDTH}s\n" "-----------" "---------------------" "------------------------------" "--------------------------------------------------"
 
     printf "%-${CPU_WIDTH}s" "$(echo "$CMD1" | cut -c1-${CPU_WIDTH})"
     printf "%-${MEM_WIDTH}s" " "
