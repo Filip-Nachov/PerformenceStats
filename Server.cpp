@@ -4,7 +4,7 @@
 int main(int argc, char* argv[]) {
     // ERROR HANDALING
     if (argc < 2) {
-        printf("ERROR: No Arguments provided");
+        printf("ERROR: No Arguments provided\n");
         return 0;
     } 
     if (std::string(argv[1]) == "-NoDelay") {
