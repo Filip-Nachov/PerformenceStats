@@ -17,9 +17,15 @@ int main(int argc, char* argv[]) {
     if (std::string(argv[1]) == "Windows" || std::string(argv[1]) == "Win") {
         if (argc >= 3 && std::string(argv[2]) == "-NoDelay") {
             int result = system("powershell ./src/WinServerPerformanceNoDelay.ps1");
+            if (result != 0) {
+                printf("ERROR: Failed to execute script.\n");
+            }
             return 0;
         }
         int result = system("./src/WinServerPerformance.ps1");
+        if (result != 0) {
+                printf("ERROR: Failed to execute script.\n");
+            }
         return 0;
     }
 
@@ -27,9 +33,15 @@ int main(int argc, char* argv[]) {
     if (std::string(argv[1]) == "Unix") {
         if (argc >= 3 && std::string(argv[2]) == "-NoDelay") {
             int result = system("./src/UnixServerPerformanceNoDelay.sh");
+            if (result != 0) {
+                printf("ERROR: Failed to execute script.\n");
+            }
             return 0;
         }
         int result = system("./src/UnixServerPerformance.sh");
+        if (result != 0) {
+                printf("ERROR: Failed to execute script.\n");
+        }
         return 0;
     } 
 
