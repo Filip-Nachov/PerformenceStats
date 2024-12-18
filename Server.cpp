@@ -29,16 +29,16 @@ int main(int argc, char* argv[]) {
         return 0;
     }
 
-   // UNIX SCENARIO
-    if (std::string(argv[1]) == "Unix") {
+   // LINUX SCENARIO
+    if (std::string(argv[1]) == "Linux" || std::string(argv[1]) == "Lin") {
         if (argc >= 3 && std::string(argv[2]) == "-NoDelay") {
-            int result = system("./src/UnixServerPerformanceNoDelay.sh");
+            int result = system("./src/LinuxServerPerformanceNoDelay.sh");
             if (result != 0) {
                 printf("ERROR: Failed to execute script.\n");
             }
             return 0;
         }
-        int result = system("./src/UnixServerPerformance.sh");
+        int result = system("./src/LinuxServerPerformance.sh");
         if (result != 0) {
                 printf("ERROR: Failed to execute script.\n");
         }
